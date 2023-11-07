@@ -4,10 +4,14 @@
   "sideEffects": false,
   "type": "module",
   "scripts": {
+    "clean:dist": "rm -rf node_modules/@remix-run/dev/dist",
+    "init:dist": "cp -r ./@remix-run/dev/dist/ node_modules/@remix-run/dev/",
+    "initialize": "npm run clean:dist && npm run init:dist",
     "build": "echo \"make sure you set the vercel build output dir to public/build; the 'vercel-build' command will run in prod and deploy to vercel \"",
-    "vercel-build": "vite build && vite build --ssr",
+    "vercel-build": "npm run initialize && vite build && vite build --ssr",
     "dev": "node ./api/server.mjs",
     "start": "cross-env NODE_ENV=production node ./api/server.mjs",
+    "local": "cross-env NODE_ENV=production node ./server.mjs",
     "typecheck": "tsc"
   },
   "dependencies": {
@@ -21,6 +25,7 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@mdx-js/rollup": "^3.0.0",
     "@remix-run/dev": "^2.2.0",
     "@remix-run/eslint-config": "^2.2.0",
     "@types/express": "^4.17.20",
@@ -28,6 +33,8 @@
     "@types/react-dom": "^18.2.7",
     "cross-env": "^7.0.3",
     "eslint": "^8.38.0",
+    "remark-frontmatter": "^5.0.0",
+    "remark-mdx-frontmatter": "^4.0.0",
     "typescript": "^5.1.6",
     "vite": "^4.5.0",
     "vite-tsconfig-paths": "^4.2.1"

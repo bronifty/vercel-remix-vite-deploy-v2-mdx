@@ -32,7 +32,7 @@ app.all(
   createRequestHandler({
     build: vite
       ? () => unstable_loadViteServerBuild(vite)
-      : await import("./api/index.js"),
+      : await import("./build/index.js"),
   })
 );
 
