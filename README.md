@@ -2,6 +2,24 @@
 
 - Make sure to set the custom build output directory (the frontend) to "public/build"; the vercel.json config file is set to intercept all requests to the frontend and redirect them to the api folder's serverless function, which then redirects requests to the custom server build functions produced by remix team via their vite plugin
 
+- the secret sauce is 2-fold:
+
+1. vercel.json intercepting all requests and routing to api folder's serverless function
+
+```json
+{
+  "rewrites": [
+    {
+      "source": "/((?!assets/).*)",
+      "destination": "/api/server.mjs"
+    }
+  ]
+}
+
+2. api folder's serverless function's default export which is a headless express (catchall application router with route handlers)
+
+```
+
 # templates/unstable-vite-express
 
 ⚠️ Remix support for Vite is unstable and not recommended for production.
